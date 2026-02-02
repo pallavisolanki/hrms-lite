@@ -12,7 +12,9 @@ export default function EmployeeList() {
     try {
       const res = await API.get("/employees/");
       // Ensure employees is always an array
-      const data = Array.isArray(res.data) ? res.data : res.data.employees || [];
+      const data = Array.isArray(res.data)
+        ? res.data
+        : res.data.employees || [];
       setEmployees(data);
     } catch (err) {
       console.error(err);
@@ -51,23 +53,23 @@ export default function EmployeeList() {
         </thead>
         <tbody>
           {employees.map((e) => (
-            <tr key={e.id} className="text-center border-t">
+            <tr key={e.employee_id} className="text-center border-t">
               <td>{e.employee_id}</td>
               <td>{e.full_name}</td>
               <td>{e.email}</td>
               <td>{e.department}</td>
               <td>
                 <button
-                  onClick={() => setSelectedEmployee(e.id)}
+                  onClick={() => setSelectedEmployee(e.employee_id)}
                   className="text-blue-600 mr-2"
                 >
                   View Attendance
                 </button>
                 <button
-                    onClick={() => deleteEmployee(e.employee_id)}
-                    className="text-red-600"
-                    >
-                    Delete
+                  onClick={() => deleteEmployee(e.employee_id)}
+                  className="text-red-600"
+                >
+                  Delete
                 </button>
               </td>
             </tr>
@@ -75,7 +77,9 @@ export default function EmployeeList() {
         </tbody>
       </table>
 
-      {selectedEmployee && <AttendanceList employeeId={selectedEmployee} />}
+      {selectedEmployee && (
+        <AttendanceList employeeId={selectedEmployee} />
+      )}
     </div>
   );
 }
