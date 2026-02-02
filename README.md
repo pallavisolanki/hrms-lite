@@ -1,134 +1,123 @@
-HRMS Lite
-Human Resource Management System (Lite)
+# HRMS Lite
+**Human Resource Management System (Lite)**
 
-HRMS Lite is a lightweight Human Resource Management System built for learning, demos, and small internal tools.
-It supports basic employee management, attendance tracking, and dashboard statistics using a FastAPI backend and a React (Vite) frontend.
+HRMS Lite is a lightweight Human Resource Management System built for learning, demos, and small internal tools.  
 
-The project follows a clean full-stack architecture and is ideal for beginner to intermediate developers.
+It supports:
+- Basic employee management  
+- Attendance tracking  
+- Dashboard statistics  
 
-✨ Key Features
+Built with **FastAPI** (backend) and **React + Vite** (frontend), it follows a clean full-stack architecture and is ideal for beginner to intermediate developers.
 
-Add, view, and delete employees
+---
 
-Mark and view employee attendance
+## ✨ Key Features
+- Add, view, and delete employees  
+- Mark and view employee attendance  
+- Dashboard with employee and attendance counts  
+- REST API built using FastAPI  
+- Modern frontend using React + Vite  
 
-Dashboard with employee and attendance counts
+---
 
-REST API built using FastAPI
+## 🛠 Tech Stack
 
-Modern frontend using React + Vite
+**Frontend:**
+- React (Vite)  
+- JavaScript  
+- Axios  
+- CSS / Tailwind-ready  
 
-🛠 Tech Stack
-Frontend
+**Backend:**
+- Python 3.12  
+- FastAPI  
+- SQLAlchemy  
+- SQLite (local database)  
+- Uvicorn  
 
-React (Vite)
+---
 
-JavaScript
-
-Axios
-
-CSS / Tailwind-ready
-
-Backend
-
-Python 3.12
-
-FastAPI
-
-SQLAlchemy
-
-SQLite (local database)
-
-Uvicorn
-
-📁 Project Structure
-HRMS-Lite
+## 📁 Project Structure
+hrms-lite
 ├── backend
-│   ├── app
-│   │   ├── routers
-│   │   │   ├── employees.py
-│   │   │   └── attendance.py
-│   │   ├── database.py
-│   │   ├── main.py
-│   │   ├── models.py
-│   │   └── schemas.py
-│   │
-│   ├── hrms.db
-│   ├── requirements.txt
-│   └── .gitignore
+│ ├── app
+│ │ ├── routers
+│ │ │ ├── employees.py
+│ │ │ └── attendance.py
+│ │ ├── database.py
+│ │ ├── main.py
+│ │ ├── models.py
+│ │ └── schemas.py
+│ ├── hrms.db
+│ ├── requirements.txt
+│ └── .gitignore
 │
 ├── frontend
-│   ├── public
-│   ├── src
-│   │   ├── api
-│   │   │   └── api.js
-│   │   ├── components
-│   │   │   ├── AttendanceForm.jsx
-│   │   │   ├── AttendanceList.jsx
-│   │   │   ├── DashboardCounts.jsx
-│   │   │   ├── EmployeeForm.jsx
-│   │   │   └── EmployeeList.jsx
-│   │   ├── pages
-│   │   │   └── Dashboard.jsx
-│   │   ├── App.jsx
-│   │   └── main.jsx
-│   │
-│   ├── package.json
-│   ├── tailwind.config.js
-│   └── vite.config.js
-│
+│ ├── public
+│ ├── src
+│ │ ├── api
+│ │ │ └── api.js
+│ │ ├── components
+│ │ │ ├── AttendanceForm.jsx
+│ │ │ ├── AttendanceList.jsx
+│ │ │ ├── DashboardCounts.jsx
+│ │ │ ├── EmployeeForm.jsx
+│ │ │ └── EmployeeList.jsx
+│ │ ├── pages
+│ │ │ └── Dashboard.jsx
+│ │ ├── App.jsx
+│ │ └── main.jsx
+│ ├── package.json
+│ ├── tailwind.config.js
+│ └── vite.config.js
 └── README.md
 
 
-▶️ Running the Project Locally
-Prerequisites
+---
 
-Node.js 18+
+## ▶️ Running the Project Locally
 
-Python 3.12+
+### Prerequisites
+- Node.js 18+  
+- Python 3.12+  
+- pip and virtual environment support  
 
-pip and virtual environment support
+---
 
-🔙 Backend Setup
+### 🔙 Backend Setup
+
+```bash
 cd backend
-
-Create and activate virtual environment
-
-Windows
-
+# Create virtual environment
+# Windows
 python -m venv venv
 venv\Scripts\activate
 
-
-macOS / Linux
-
+# macOS / Linux
 python -m venv venv
 source venv/bin/activate
 
-Install dependencies
+# Install dependencies
 pip install -r requirements.txt
 
-Start FastAPI server
+# Start FastAPI server
 uvicorn app.main:app --reload
-
-API documentation
-http://127.0.0.1:8000/docs
+API documentation: http://127.0.0.1:8000/docs
 
 🔜 Frontend Setup
 cd frontend
+# Install dependencies
 npm install
 
-Environment Variables
+# Create environment variable file
+echo "VITE_API_URL=http://127.0.0.1:8000" > .env.local
 
-Create a .env.local file inside the frontend folder:
-
-VITE_API_URL=http://127.0.0.1:8000
-
-Start development server
+# Start development server
 npm run dev
 
-Open browser
-http://localhost:5173
+
+Open browser: http://localhost:5173
 
 ⚠️ Assumptions & Limitations
 
@@ -162,3 +151,10 @@ Production deployment
 
 Pallavi Solanki
 Full-stack learning project using FastAPI and React (Vite)
+
+
+---
+
+If you want, I can also **add badges, links, and a clean GitHub banner** so your README looks professional and eye-catching on GitHub.  
+
+Do you want me to do that?
