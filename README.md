@@ -42,8 +42,7 @@ SQLite (local database)
 Uvicorn
 
 📁 Project Structure
-hrms-lite
-│
+HRMS-Lite
 ├── backend
 │   ├── app
 │   │   ├── routers
@@ -54,10 +53,9 @@ hrms-lite
 │   │   ├── models.py
 │   │   └── schemas.py
 │   │
-│   ├── venv
 │   ├── hrms.db
-│   ├── .gitignore
-│   └── requirements.txt
+│   ├── requirements.txt
+│   └── .gitignore
 │
 ├── frontend
 │   ├── public
@@ -80,6 +78,7 @@ hrms-lite
 │   └── vite.config.js
 │
 └── README.md
+
 
 ▶️ Running the Project Locally
 Prerequisites
