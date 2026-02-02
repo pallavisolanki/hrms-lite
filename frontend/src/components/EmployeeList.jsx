@@ -64,10 +64,10 @@ export default function EmployeeList() {
                   View Attendance
                 </button>
                 <button
-                  onClick={() => deleteEmployee(e.id)}
-                  className="text-red-600"
-                >
-                  Delete
+                    onClick={() => deleteEmployee(e.employee_id)}
+                    className="text-red-600"
+                    >
+                    Delete
                 </button>
               </td>
             </tr>
