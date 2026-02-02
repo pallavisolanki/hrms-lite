@@ -32,13 +32,12 @@ def get_employees(db: Session = Depends(get_db)):
 
 @router.delete("/{employee_id}")
 def delete_employee(employee_id: str, db: Session = Depends(get_db)):
-    emp = db.query(models.Employee).filter(
+    deleted = db.query(models.Employee).filter(
         models.Employee.employee_id == employee_id
-    ).first()
+    ).delete(synchronize_session=False)
 
-    if not emp:
+    if deleted == 0:
         raise HTTPException(status_code=404, detail="Employee not found")
 
-    db.delete(emp)
     db.commit()
     return {"message": "Employee deleted"}
