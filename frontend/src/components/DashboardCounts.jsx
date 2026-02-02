@@ -1,3 +1,4 @@
+// src/components/DashboardCounts.jsx
 import { useEffect, useState } from "react";
 import API from "../api/api";
 
@@ -10,12 +11,11 @@ export default function DashboardCounts() {
   const loadCounts = async () => {
     setLoading(true);
     try {
-      // Fetch all employees
       const resEmp = await API.get("/employees/");
       const employees = resEmp.data;
       setTotalEmployees(employees.length);
 
-      // Fetch all attendance records in parallel (faster)
+      // Fetch attendance for all employees in parallel
       const attendancePromises = employees.map((emp) =>
         API.get(`/attendance/${emp.employee_id}`)
       );
@@ -43,7 +43,7 @@ export default function DashboardCounts() {
     loadCounts();
   }, []);
 
-  if (loading) return <p>Loading counts...</p>;
+  if (loading) return <p>Loading dashboard counts...</p>;
 
   return (
     <div className="grid grid-cols-3 gap-4 mb-4">
