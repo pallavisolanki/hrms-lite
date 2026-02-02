@@ -5,14 +5,12 @@ from app import models, schemas
 
 router = APIRouter(prefix="/employees", tags=["Employees"])
 
-
 def get_db():
     db = SessionLocal()
     try:
         yield db
     finally:
         db.close()
-
 
 @router.post("/")
 def add_employee(emp: schemas.EmployeeCreate, db: Session = Depends(get_db)):
@@ -28,25 +26,18 @@ def add_employee(emp: schemas.EmployeeCreate, db: Session = Depends(get_db)):
     db.commit()
     return {"message": "Employee added successfully"}
 
-
 @router.get("/")
 def get_employees(db: Session = Depends(get_db)):
-    # ✅ ONLY ACTIVE EMPLOYEES
-    return db.query(models.Employee).filter(
-        models.Employee.is_active == True
-    ).all()
+    return db.query(models.Employee).all()
 
-
-@router.put("/{employee_id}/deactivate")
-def deactivate_employee(employee_id: str, db: Session = Depends(get_db)):
-    emp = db.query(models.Employee).filter(
+@router.delete("/{employee_id}")
+def delete_employee(employee_id: str, db: Session = Depends(get_db)):
+    deleted = db.query(models.Employee).filter(
         models.Employee.employee_id == employee_id
-    ).first()
+    ).delete(synchronize_session=False)
 
-    if not emp:
+    if deleted == 0:
         raise HTTPException(status_code=404, detail="Employee not found")
 
-    emp.is_active = False
     db.commit()
-
-    return {"message": "Employee deactivated"}
+    return {"message": "Employee deleted"}

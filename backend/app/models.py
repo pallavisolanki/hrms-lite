@@ -12,11 +12,10 @@ class Employee(Base):
     email = Column(String, unique=True, nullable=False)
     department = Column(String, nullable=False)
 
-    is_active = Column(Boolean, default=True)  # ✅ SOFT DELETE FLAG
-
     attendance = relationship(
         "Attendance",
         back_populates="employee"
+        cascade="all, delete-orphan" 
     )
 
 
