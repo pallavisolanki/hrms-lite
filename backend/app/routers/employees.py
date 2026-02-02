@@ -1,43 +1,35 @@
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from app.database import SessionLocal
 from app import models, schemas
+from app.database import get_db
 
 router = APIRouter(prefix="/employees", tags=["Employees"])
 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
-@router.post("/")
-def add_employee(emp: schemas.EmployeeCreate, db: Session = Depends(get_db)):
-    existing = db.query(models.Employee).filter(
-        models.Employee.employee_id == emp.employee_id
-    ).first()
-
-    if existing:
-        raise HTTPException(status_code=400, detail="Employee already exists")
-
-    new_emp = models.Employee(**emp.dict())
-    db.add(new_emp)
+@router.post("/", response_model=schemas.EmployeeResponse)
+def create_employee(employee: schemas.EmployeeCreate, db: Session = Depends(get_db)):
+    db_employee = models.Employee(**employee.dict())
+    db.add(db_employee)
     db.commit()
-    return {"message": "Employee added successfully"}
+    db.refresh(db_employee)
+    return db_employee
 
-@router.get("/")
+
+@router.get("/", response_model=list[schemas.EmployeeResponse])
 def get_employees(db: Session = Depends(get_db)):
     return db.query(models.Employee).all()
 
+
 @router.delete("/{employee_id}")
 def delete_employee(employee_id: str, db: Session = Depends(get_db)):
-    deleted = db.query(models.Employee).filter(
+    employee = db.query(models.Employee).filter(
         models.Employee.employee_id == employee_id
-    ).delete(synchronize_session=False)
+    ).first()
 
-    if deleted == 0:
+    if not employee:
         raise HTTPException(status_code=404, detail="Employee not found")
 
+    db.delete(employee)
     db.commit()
-    return {"message": "Employee deleted"}
+
+    return {"message": "Employee and related attendance deleted successfully"}
