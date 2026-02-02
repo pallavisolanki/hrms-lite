@@ -11,7 +11,9 @@ export default function EmployeeList() {
     setLoading(true);
     try {
       const res = await API.get("/employees/");
-      setEmployees(res.data);
+      // Ensure employees is always an array
+      const data = Array.isArray(res.data) ? res.data : res.data.employees || [];
+      setEmployees(data);
     } catch (err) {
       console.error(err);
       setEmployees([]);
@@ -49,20 +51,20 @@ export default function EmployeeList() {
         </thead>
         <tbody>
           {employees.map((e) => (
-            <tr key={e.employee_id} className="text-center border-t">
+            <tr key={e.id} className="text-center border-t">
               <td>{e.employee_id}</td>
               <td>{e.full_name}</td>
               <td>{e.email}</td>
               <td>{e.department}</td>
               <td>
                 <button
-                  onClick={() => setSelectedEmployee(e.employee_id)}
+                  onClick={() => setSelectedEmployee(e.id)}
                   className="text-blue-600 mr-2"
                 >
                   View Attendance
                 </button>
                 <button
-                  onClick={() => deleteEmployee(e.employee_id)}
+                  onClick={() => deleteEmployee(e.id)}
                   className="text-red-600"
                 >
                   Delete
@@ -73,7 +75,6 @@ export default function EmployeeList() {
         </tbody>
       </table>
 
-      {/* Render AttendanceList */}
       {selectedEmployee && <AttendanceList employeeId={selectedEmployee} />}
     </div>
   );

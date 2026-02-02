@@ -1,4 +1,3 @@
-// src/components/DashboardCounts.jsx
 import { useEffect, useState } from "react";
 import API from "../api/api";
 
@@ -12,10 +11,9 @@ export default function DashboardCounts() {
     setLoading(true);
     try {
       const resEmp = await API.get("/employees/");
-      const employees = resEmp.data;
+      const employees = Array.isArray(resEmp.data) ? resEmp.data : resEmp.data.employees || [];
       setTotalEmployees(employees.length);
 
-      // Fetch attendance for all employees in parallel
       const attendancePromises = employees.map((emp) =>
         API.get(`/attendance/${emp.employee_id}`)
       );
