@@ -11,11 +11,7 @@ export default function EmployeeList() {
     setLoading(true);
     try {
       const res = await API.get("/employees/");
-      // Ensure employees is always an array
-      const data = Array.isArray(res.data)
-        ? res.data
-        : res.data.employees || [];
-      setEmployees(data);
+      setEmployees(res.data || []);
     } catch (err) {
       console.error(err);
       setEmployees([]);
@@ -24,10 +20,14 @@ export default function EmployeeList() {
     }
   };
 
-  const deleteEmployee = async (id) => {
-    await API.delete(`/employees/${id}`);
-    if (selectedEmployee === id) setSelectedEmployee(null); // reset attendance view
-    loadEmployees();
+  const deactivateEmployee = async (id) => {
+    try {
+      await API.put(`/employees/${id}/deactivate`);
+      if (selectedEmployee === id) setSelectedEmployee(null);
+      loadEmployees();
+    } catch (err) {
+      alert(err.response?.data?.detail || "Action failed");
+    }
   };
 
   useEffect(() => {
@@ -66,10 +66,10 @@ export default function EmployeeList() {
                   View Attendance
                 </button>
                 <button
-                  onClick={() => deleteEmployee(e.employee_id)}
-                  className="text-red-600"
+                  onClick={() => deactivateEmployee(e.employee_id)}
+                  className="text-orange-600"
                 >
-                  Delete
+                  Deactivate
                 </button>
               </td>
             </tr>

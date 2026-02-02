@@ -1,5 +1,7 @@
-from sqlalchemy import Column, Integer, String, Date, ForeignKey
+from sqlalchemy import Column, Integer, String, Date, ForeignKey, Boolean
+from sqlalchemy.orm import relationship
 from .database import Base
+
 
 class Employee(Base):
     __tablename__ = "employees"
@@ -10,6 +12,13 @@ class Employee(Base):
     email = Column(String, unique=True, nullable=False)
     department = Column(String, nullable=False)
 
+    is_active = Column(Boolean, default=True)  # ✅ SOFT DELETE FLAG
+
+    attendance = relationship(
+        "Attendance",
+        back_populates="employee"
+    )
+
 
 class Attendance(Base):
     __tablename__ = "attendance"
@@ -18,3 +27,8 @@ class Attendance(Base):
     employee_id = Column(String, ForeignKey("employees.employee_id"))
     date = Column(Date)
     status = Column(String)
+
+    employee = relationship(
+        "Employee",
+        back_populates="attendance"
+    )
