@@ -8,11 +8,11 @@ It supports:
 - Attendance tracking  
 - Dashboard statistics  
 
-Built with **FastAPI** (backend) and **React + Vite** (frontend), it follows a clean full-stack architecture and is ideal for beginner to intermediate developers.
+Built with **FastAPI** (backend) and **React + Vite** (frontend), ideal for beginner to intermediate developers.
 
 ---
 
-## ✨ Key Features
+### ✨ Key Features
 - Add, view, and delete employees  
 - Mark and view employee attendance  
 - Dashboard with employee and attendance counts  
@@ -21,7 +21,7 @@ Built with **FastAPI** (backend) and **React + Vite** (frontend), it follows a c
 
 ---
 
-## 🛠 Tech Stack
+### 🛠 Tech Stack
 
 **Frontend:**
 - React (Vite)  
@@ -38,7 +38,8 @@ Built with **FastAPI** (backend) and **React + Vite** (frontend), it follows a c
 
 ---
 
-## 📁 Project Structure
+### 📁 Project Structure
+
 hrms-lite
 ├── backend
 │ ├── app
@@ -76,19 +77,11 @@ hrms-lite
 
 ---
 
-## ▶️ Running the Project Locally
-
-### Prerequisites
-- Node.js 18+  
-- Python 3.12+  
-- pip and virtual environment support  
-
----
-
 ### 🔙 Backend Setup
 
 ```bash
 cd backend
+
 # Create virtual environment
 # Windows
 python -m venv venv
@@ -105,8 +98,10 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload
 API documentation: http://127.0.0.1:8000/docs
 
-🔜 Frontend Setup
+### ➡️ Frontend Setup
+
 cd frontend
+
 # Install dependencies
 npm install
 
@@ -115,12 +110,9 @@ echo "VITE_API_URL=http://127.0.0.1:8000" > .env.local
 
 # Start development server
 npm run dev
-
-
 Open browser: http://localhost:5173
 
 ⚠️ Assumptions & Limitations
-
 No authentication or role-based access
 
 All users can perform all actions
@@ -134,7 +126,6 @@ SQLite used for simplicity
 Not optimized for large-scale production use
 
 🚀 Future Improvements
-
 Authentication and authorization
 
 Role-based access (Admin / HR / Employee)
@@ -148,13 +139,6 @@ PostgreSQL integration
 Production deployment
 
 👩‍💻 Author
-
 Pallavi Solanki
 Full-stack learning project using FastAPI and React (Vite)
 
-
----
-
-If you want, I can also **add badges, links, and a clean GitHub banner** so your README looks professional and eye-catching on GitHub.  
-
-Do you want me to do that?
